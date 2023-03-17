@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 
-const val BASE_URL = "https://api.ouka.fi/v1"
+const val BASE_URL = "https://api.ouka.fi/v1/"
 
 interface TodosApi {
     @GET("city_personnel_kpi")

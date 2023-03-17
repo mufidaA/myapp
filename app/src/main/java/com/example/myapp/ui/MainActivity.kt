@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    /*TodoScreen()*/
                     MainScreen()
                 }
             }
@@ -75,29 +74,6 @@ private fun MainScreen() {
                     bottom = paddingValues.calculateBottomPadding()),
                 navController = navController
             )
-        }
-    }
-}
-
-@Composable
-fun TodoScreen(todoViewModel: TodoViewModel = viewModel()) {
-    TodoList(todoViewModel.todos)
-
-}
-
-@Composable
-fun TodoList(todos: List<Todo>) {
-
-    LazyColumn (
-        modifier = Modifier.padding(8.dp)
-    ) {
-        items(todos) { todo->
-            Text (
-                text = todo.organisation,
-                modifier = Modifier.padding(top = 4.dp,bottom = 4.dp)
-            )
-            Divider(color = Color.LightGray, thickness = 1.dp)
-
         }
     }
 }

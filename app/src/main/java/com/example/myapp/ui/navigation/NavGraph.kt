@@ -2,6 +2,7 @@ package com.example.myapp.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -111,10 +112,8 @@ private fun addSearchScreen(
 
         val args = navBackStackEntry.arguments
 
-        SearchScreen(
-            query = args?.getString(NavRoute.Search.query),
-            popBackStack = { navController.popBackStack() },
-            popUpToLogin = { popUpToLogin(navController) }
+        SearchScreen(todoViewModel = viewModel()
+
         )
     }
 }
