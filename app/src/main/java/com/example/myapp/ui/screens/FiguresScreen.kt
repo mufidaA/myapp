@@ -20,10 +20,11 @@ import com.example.myapp.model.Todo
 import com.example.myapp.ui.theme.MyappTheme
 import com.example.myapp.viewmodel.TodoViewModel
 import android.util.Log
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import kotlin.math.max
 import kotlin.math.min
 
@@ -43,45 +44,52 @@ private fun DefaultPreview() {
 
 @Composable
 fun FiguresScreen(todoViewModel: TodoViewModel = viewModel()) {
-    Graph(todoViewModel.todos, modifier = Modifier, paddingSpace = 20.dp, verticalStep = 1.0f)
+    val filteredTodos = remember(todoViewModel.todos) { mutableStateListOf<Todo>() }
+    val searchText = remember { mutableStateOf("") }
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        TextField(
+            value = searchText.value,
+            onValueChange = { searchText.value = it },
+            label = { Text("Search by Organization") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        filteredTodos.clear()
+        for (todo in todoViewModel.todos) {
+            if (todo.personnel_cost == null) continue
+            if (todo.personnel_cost.toInt() < 0) continue
+            if (todo.organisation.contains(searchText.value, true)) {
+                filteredTodos.add(todo)
+            }
+        }
+
+        Graph(filteredTodos, modifier = Modifier, paddingSpace = 20.dp, verticalStep = 1.0f)
+    }
 }
 
 @Composable
 fun Graph(todos: List<Todo>,
           modifier : Modifier,
-//    xValues: List<Int>,
-//    yValues: List<Int>,
-//    points: List<Float>,
           paddingSpace: Dp,
           verticalStep: Float) {
     val xValues = mutableListOf<Int>()
     val yValues = mutableListOf<Int>()
     val pointsY = mutableListOf<Float>()
     val pointsX = mutableListOf<Float>()
-    for (x in arrayOf(
-        2013, 2014, 2015, 2016, 2017, 2018,
-        2019, 2020
-    )) {
+
+    for (x in 2013..2020 step 1) {
         xValues.add(x)
     }
-    for (y in arrayOf(
-        0, 50000, 100000, 150000, 200000, 250000, 300000,
-        350000, 400000, 450000, 500000, 550000, 650000, 700000,
-        750000, 800000, 950000, 1000000, 1100000, 1150000, 1200000,
-        1250000, 1300000, 1350000, 1400000, 1450000, 1500000, 1550000,
-        1600000
-    )) {
+
+    for (y in 0..1600000 step 50000) {
         yValues.add(y)
     }
 
     for(tod in todos){
-        if(tod.personnel_cost == null) continue
-        else if (tod.personnel_cost.toInt() < 0 ) continue
-        else if (tod.organisation == "Oulun seudun ympäristöt.laitos"){
+
             pointsY.add(tod.personnel_cost.toFloat())
             pointsX.add(tod.year.toFloat())
-        }
-        else {continue}
 
     }
 
