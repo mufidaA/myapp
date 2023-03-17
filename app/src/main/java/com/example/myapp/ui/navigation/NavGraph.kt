@@ -2,6 +2,7 @@ package com.example.myapp.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -9,7 +10,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.myapp.ui.screens.*
+import com.example.myapp.ui.screens.HomeScreen
+import com.example.myapp.ui.screens.LoginScreen
+import com.example.myapp.ui.screens.ProfileScreen
+import com.example.myapp.ui.screens.SearchScreen
 
 @Composable
 fun NavGraph(modifier: Modifier = Modifier, navController: NavHostController) {
@@ -110,7 +114,11 @@ private fun addSearchScreen(
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments
-        SearchScreen(todoViewModel = viewModel())
+
+        SearchScreen(
+            todoViewModel = viewModel(),
+            context = LocalContext.current
+        )
     }
 }
 
@@ -120,7 +128,9 @@ private fun addFiguresScreen(
 ) {
     navGraphBuilder.composable(route = NavRoute.Figures.path) {
 
-        FiguresScreen(todoViewModel = viewModel())
-
+        SearchScreen(
+            todoViewModel = viewModel(),
+            context = LocalContext.current
+        )
     }
 }
