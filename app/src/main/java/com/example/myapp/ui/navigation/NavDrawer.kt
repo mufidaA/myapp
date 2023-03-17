@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,6 +49,15 @@ fun DrawerBody(navController: NavHostController?, closeNavDrawer: () -> Unit) {
                 closeNavDrawer()
             }
         )
+        DrawerMenuItem(
+            imageVector = Icons.Default.Info,
+            text = NavRoute.Figures.path,
+            onItemClick = {
+                navController?.navigate(NavRoute.Figures.path)
+                closeNavDrawer()
+            }
+        )
+
     }
 }
 

@@ -10,6 +10,7 @@ sealed class NavRoute(val path: String) {
         val id = "id"
         val showDetails = "showDetails"
     }
+    object Figures: NavRoute("figures")
 
     object Search: NavRoute("search") {
         val query = "query"
