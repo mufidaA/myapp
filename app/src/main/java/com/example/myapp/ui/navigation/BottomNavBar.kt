@@ -5,8 +5,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
@@ -42,21 +41,23 @@ fun BottomBarNav(navController: NavController) {
             label = {Text(NavRoute.Home.path)}
         )
 
-        val searchSelected =  currentRoute == NavRoute.Search.withArgsFormat(NavRoute.Search.query)
+        //val searchSelected =  currentRoute == NavRoute.Search.withArgsFormat(NavRoute.Search.query)
         BottomNavigationItem(
+
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Search,
+                    imageVector = Icons.Default.ExitToApp,
                     contentDescription = NavRoute.Home.path
                 )
             },
-            selected = searchSelected,
+            selected = homeSelected,
             onClick = {
-                if(!searchSelected) {
-                    navController.navigate(NavRoute.Search.withArgs("Liang Moi"))
+                    navController.navigate(NavRoute.Login.path) {
+                        popUpTo(NavRoute.Login.path) { inclusive = true }
+
                 }
             },
-            label = { Text(NavRoute.Search.path) }
+            label = {Text(text = "Logout")}
         )
     }
 }

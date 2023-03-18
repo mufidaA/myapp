@@ -6,15 +6,9 @@ sealed class NavRoute(val path: String) {
 
     object Home: NavRoute("home")
 
-    object Profile: NavRoute("profile") {
-        val id = "id"
-        val showDetails = "showDetails"
-    }
     object Figures: NavRoute("figures")
 
-    object Search: NavRoute("search") {
-        val query = "query"
-    }
+    object Search: NavRoute("search")
 
     // build navigation path (for screen navigation)
     fun withArgs(vararg args: String): String {

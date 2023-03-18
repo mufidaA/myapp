@@ -40,8 +40,12 @@ private fun DefaultPreview() {
 fun SearchScreen(todoViewModel: TodoViewModel) {
     val searchQuery = remember { mutableStateOf("") }
     val filteredTodos = remember(todoViewModel.todos, searchQuery.value) {
-        todoViewModel.todos.filter {
-            it.organisation.contains(searchQuery.value, ignoreCase = true)
+        if (searchQuery.value.isBlank()) {
+            todoViewModel.todos
+        } else {
+            todoViewModel.todos.filter {
+                it.organisation.contains(searchQuery.value, ignoreCase = true)
+            }
         }
     }
 
@@ -69,7 +73,7 @@ fun TodoList(todos: List<Todo>) {
                     text = AnnotatedString(todo.organisation + " info dated: " + todo.month + "." +todo.year ),
                     onClick = {
                         val message = "${todo.organisation} has: \n"+
-                                "Personnel amount of: ${todo.personnel_amount}\n" +
+                                "Personnel amount: ${todo.personnel_amount}\n" +
                                 "with Personnel cost of: ${todo.personnel_cost} €\n" +
                                 "and Personnel effectivity of: ${todo.personnel_effectivity}"
                         messageToShow.value = message

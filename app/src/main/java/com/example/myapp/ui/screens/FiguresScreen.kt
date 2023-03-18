@@ -51,7 +51,7 @@ fun FiguresScreen(todoViewModel: TodoViewModel = viewModel()) {
         TextField(
             value = searchText.value,
             onValueChange = { searchText.value = it },
-            label = { Text("Search by Organization") },
+            label = { Text("Search Personnel cost by Organization") },
             modifier = Modifier.fillMaxWidth()
         )
 

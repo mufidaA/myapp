@@ -45,7 +45,7 @@ fun DrawerBody(navController: NavHostController?, closeNavDrawer: () -> Unit) {
             imageVector = Icons.Default.Search,
             text = NavRoute.Search.path,
             onItemClick = {
-                navController?.navigate(NavRoute.Search.withArgs("liang moi"))
+                navController?.navigate(NavRoute.Search.path)
                 closeNavDrawer()
             }
         )
@@ -57,7 +57,6 @@ fun DrawerBody(navController: NavHostController?, closeNavDrawer: () -> Unit) {
                 closeNavDrawer()
             }
         )
-
     }
 }
 
